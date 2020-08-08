@@ -26,8 +26,6 @@ namespace ItemIzer
 
         private static IDbConnection database;
 
-        public int Here;
-
         public ItemIzer(Main game) : base(game) 
         {
             Order = 30;
