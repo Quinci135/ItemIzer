@@ -126,7 +126,7 @@ namespace ItemIzer
                         }
                     }
                     Task.Delay(600);
-                    using (QueryResult reader = database.QueryReader("SELECT * FROM tsCharacter"))
+                    using (QueryResult reader = database.QueryReader($"SELECT * FROM tsCharacter WHERE Inventory LIKE '%{item.NetId}%'"))
                     {
                         while (reader.Read())
                         {
@@ -343,7 +343,8 @@ namespace ItemIzer
                                     player.PlayerData.inventory = playerData.inventory;
                                     player.PlayerData.RestoreCharacter(player); 
                                 }
-                                args.Player.SendInfoMessage($"Removed {stack} items of type \"{TShock.Utils.GetItemById(item.NetId).Name}\" from {account.Name}'s inventory");
+                                TShock.Log.ConsoleInfo($"[ItemIzer] \"{args.Player.Name}\" removed {stack} of item \"{TShock.Utils.GetItemById(item.NetId).Name}\" from \"{account.Name}\"'s inventory");
+                                args.Player.SendInfoMessage($"Removed {stack} items of type \"{TShock.Utils.GetItemById(item.NetId).Name}\" from \"{account.Name}\"'s inventory");
                             }
                             else
                             {
